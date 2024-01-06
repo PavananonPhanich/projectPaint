@@ -43,6 +43,10 @@ namespace projectPaint {
 
 	System::Drawing::Point^ startPoint;
 	private: System::Windows::Forms::Button^ type_btn;
+	private: System::Windows::Forms::Button^ eraser_btn;
+	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator2;
+	private: System::Windows::Forms::ToolStripMenuItem^ whiteCanvasBtn;
+
 	public:
 
 	public:
@@ -137,6 +141,7 @@ namespace projectPaint {
 			this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxPanel = (gcnew System::Windows::Forms::Panel());
+			this->eraser_btn = (gcnew System::Windows::Forms::Button());
 			this->type_btn = (gcnew System::Windows::Forms::Button());
 			this->triangle_btn = (gcnew System::Windows::Forms::Button());
 			this->circle_btn = (gcnew System::Windows::Forms::Button());
@@ -155,6 +160,8 @@ namespace projectPaint {
 			this->openBtn = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->saveBtn = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->saveAsBtn = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->whiteCanvasBtn = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->exitBtn = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->convertToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -181,11 +188,11 @@ namespace projectPaint {
 			this->toolStripContainer1->ContentPanel->Controls->Add(this->pictureBox);
 			this->toolStripContainer1->ContentPanel->Controls->Add(this->panel1);
 			this->toolStripContainer1->ContentPanel->Controls->Add(this->button4);
-			this->toolStripContainer1->ContentPanel->Size = System::Drawing::Size(913, 472);
+			this->toolStripContainer1->ContentPanel->Size = System::Drawing::Size(934, 467);
 			this->toolStripContainer1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->toolStripContainer1->Location = System::Drawing::Point(0, 0);
 			this->toolStripContainer1->Name = L"toolStripContainer1";
-			this->toolStripContainer1->Size = System::Drawing::Size(913, 496);
+			this->toolStripContainer1->Size = System::Drawing::Size(934, 491);
 			this->toolStripContainer1->TabIndex = 0;
 			this->toolStripContainer1->Text = L"toolStripContainer1";
 			// 
@@ -198,7 +205,7 @@ namespace projectPaint {
 			this->pictureBox->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->pictureBox->Location = System::Drawing::Point(0, 100);
 			this->pictureBox->Name = L"pictureBox";
-			this->pictureBox->Size = System::Drawing::Size(913, 372);
+			this->pictureBox->Size = System::Drawing::Size(934, 367);
 			this->pictureBox->TabIndex = 4;
 			this->pictureBox->TabStop = false;
 			this->pictureBox->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox_MouseDown);
@@ -211,13 +218,14 @@ namespace projectPaint {
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(913, 100);
+			this->panel1->Size = System::Drawing::Size(934, 100);
 			this->panel1->TabIndex = 3;
 			// 
 			// pictureBoxPanel
 			// 
 			this->pictureBoxPanel->AutoScroll = true;
 			this->pictureBoxPanel->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->pictureBoxPanel->Controls->Add(this->eraser_btn);
 			this->pictureBoxPanel->Controls->Add(this->type_btn);
 			this->pictureBoxPanel->Controls->Add(this->triangle_btn);
 			this->pictureBoxPanel->Controls->Add(this->circle_btn);
@@ -233,14 +241,26 @@ namespace projectPaint {
 			this->pictureBoxPanel->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->pictureBoxPanel->Location = System::Drawing::Point(0, 0);
 			this->pictureBoxPanel->Name = L"pictureBoxPanel";
-			this->pictureBoxPanel->Size = System::Drawing::Size(913, 100);
+			this->pictureBoxPanel->Size = System::Drawing::Size(934, 100);
 			this->pictureBoxPanel->TabIndex = 2;
+			// 
+			// eraser_btn
+			// 
+			this->eraser_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->eraser_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->eraser_btn->Location = System::Drawing::Point(189, 19);
+			this->eraser_btn->Name = L"eraser_btn";
+			this->eraser_btn->Size = System::Drawing::Size(60, 60);
+			this->eraser_btn->TabIndex = 16;
+			this->eraser_btn->Text = L"Eraser";
+			this->eraser_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
+			this->eraser_btn->UseVisualStyleBackColor = false;
 			// 
 			// type_btn
 			// 
 			this->type_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->type_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->type_btn->Location = System::Drawing::Point(280, 19);
+			this->type_btn->Location = System::Drawing::Point(344, 19);
 			this->type_btn->Name = L"type_btn";
 			this->type_btn->Size = System::Drawing::Size(60, 60);
 			this->type_btn->TabIndex = 15;
@@ -252,7 +272,7 @@ namespace projectPaint {
 			// 
 			this->triangle_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->triangle_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->triangle_btn->Location = System::Drawing::Point(651, 19);
+			this->triangle_btn->Location = System::Drawing::Point(686, 19);
 			this->triangle_btn->Name = L"triangle_btn";
 			this->triangle_btn->Size = System::Drawing::Size(60, 60);
 			this->triangle_btn->TabIndex = 14;
@@ -265,7 +285,7 @@ namespace projectPaint {
 			// 
 			this->circle_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->circle_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->circle_btn->Location = System::Drawing::Point(519, 19);
+			this->circle_btn->Location = System::Drawing::Point(554, 19);
 			this->circle_btn->Name = L"circle_btn";
 			this->circle_btn->Size = System::Drawing::Size(60, 60);
 			this->circle_btn->TabIndex = 13;
@@ -278,7 +298,7 @@ namespace projectPaint {
 			// 
 			this->freehand_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->freehand_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->freehand_btn->Location = System::Drawing::Point(453, 19);
+			this->freehand_btn->Location = System::Drawing::Point(488, 19);
 			this->freehand_btn->Name = L"freehand_btn";
 			this->freehand_btn->Size = System::Drawing::Size(60, 60);
 			this->freehand_btn->TabIndex = 12;
@@ -291,7 +311,7 @@ namespace projectPaint {
 			// 
 			this->line_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->line_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->line_btn->Location = System::Drawing::Point(387, 19);
+			this->line_btn->Location = System::Drawing::Point(422, 19);
 			this->line_btn->Name = L"line_btn";
 			this->line_btn->Size = System::Drawing::Size(60, 60);
 			this->line_btn->TabIndex = 11;
@@ -317,7 +337,7 @@ namespace projectPaint {
 			// 
 			this->square_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->square_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->square_btn->Location = System::Drawing::Point(717, 19);
+			this->square_btn->Location = System::Drawing::Point(752, 19);
 			this->square_btn->Name = L"square_btn";
 			this->square_btn->Size = System::Drawing::Size(60, 60);
 			this->square_btn->TabIndex = 8;
@@ -330,7 +350,7 @@ namespace projectPaint {
 			// 
 			this->ellipse_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->ellipse_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->ellipse_btn->Location = System::Drawing::Point(585, 19);
+			this->ellipse_btn->Location = System::Drawing::Point(620, 19);
 			this->ellipse_btn->Name = L"ellipse_btn";
 			this->ellipse_btn->Size = System::Drawing::Size(60, 60);
 			this->ellipse_btn->TabIndex = 7;
@@ -343,7 +363,7 @@ namespace projectPaint {
 			// 
 			this->size_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->size_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->size_btn->Location = System::Drawing::Point(214, 19);
+			this->size_btn->Location = System::Drawing::Point(278, 19);
 			this->size_btn->Name = L"size_btn";
 			this->size_btn->Size = System::Drawing::Size(60, 60);
 			this->size_btn->TabIndex = 6;
@@ -409,15 +429,15 @@ namespace projectPaint {
 			});
 			this->menuStrip->Location = System::Drawing::Point(0, 0);
 			this->menuStrip->Name = L"menuStrip";
-			this->menuStrip->Size = System::Drawing::Size(913, 24);
+			this->menuStrip->Size = System::Drawing::Size(934, 24);
 			this->menuStrip->TabIndex = 0;
 			this->menuStrip->Text = L"menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
 				this->openBtn,
-					this->saveBtn, this->saveAsBtn, this->toolStripSeparator1, this->exitBtn
+					this->saveBtn, this->saveAsBtn, this->toolStripSeparator2, this->whiteCanvasBtn, this->toolStripSeparator1, this->exitBtn
 			});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
@@ -426,33 +446,44 @@ namespace projectPaint {
 			// openBtn
 			// 
 			this->openBtn->Name = L"openBtn";
-			this->openBtn->Size = System::Drawing::Size(114, 22);
+			this->openBtn->Size = System::Drawing::Size(146, 22);
 			this->openBtn->Text = L"&Open";
 			this->openBtn->Click += gcnew System::EventHandler(this, &MyForm::openBtn_Click);
 			// 
 			// saveBtn
 			// 
 			this->saveBtn->Name = L"saveBtn";
-			this->saveBtn->Size = System::Drawing::Size(114, 22);
+			this->saveBtn->Size = System::Drawing::Size(146, 22);
 			this->saveBtn->Text = L"&Save";
 			this->saveBtn->Click += gcnew System::EventHandler(this, &MyForm::saveBtn_Click);
 			// 
 			// saveAsBtn
 			// 
 			this->saveAsBtn->Name = L"saveAsBtn";
-			this->saveAsBtn->Size = System::Drawing::Size(114, 22);
+			this->saveAsBtn->Size = System::Drawing::Size(146, 22);
 			this->saveAsBtn->Text = L"&Save As";
 			this->saveAsBtn->Click += gcnew System::EventHandler(this, &MyForm::saveAsBtn_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this->toolStripSeparator2->Name = L"toolStripSeparator2";
+			this->toolStripSeparator2->Size = System::Drawing::Size(143, 6);
+			// 
+			// whiteCanvasBtn
+			// 
+			this->whiteCanvasBtn->Name = L"whiteCanvasBtn";
+			this->whiteCanvasBtn->Size = System::Drawing::Size(146, 22);
+			this->whiteCanvasBtn->Text = L"White Canvas";
 			// 
 			// toolStripSeparator1
 			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(111, 6);
+			this->toolStripSeparator1->Size = System::Drawing::Size(143, 6);
 			// 
 			// exitBtn
 			// 
 			this->exitBtn->Name = L"exitBtn";
-			this->exitBtn->Size = System::Drawing::Size(114, 22);
+			this->exitBtn->Size = System::Drawing::Size(146, 22);
 			this->exitBtn->Text = L"&Exit";
 			this->exitBtn->Click += gcnew System::EventHandler(this, &MyForm::exitBtn_Click);
 			// 
@@ -500,7 +531,7 @@ namespace projectPaint {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(913, 496);
+			this->ClientSize = System::Drawing::Size(934, 491);
 			this->Controls->Add(this->toolStripContainer1);
 			this->MainMenuStrip = this->menuStrip;
 			this->Name = L"MyForm";
@@ -645,39 +676,95 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 	if (bmp != nullptr) {
 		switch (drawState) {
 		case DrawState::DrawLine:
-		case DrawState::DrawEllipse:
 			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
 			if (drawState == DrawState::DrawLine)
 				drawState = DrawState::DrawingLine;
-			else
+		case DrawState::DrawFreehand:
+			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+			if (drawState == DrawState::DrawFreehand)
+				drawState = DrawState::DrawingFreehand;
+		case DrawState::DrawCircle:
+			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+			if (drawState == DrawState::DrawCircle)
+				drawState = DrawState::DrawingCircle;
+		case DrawState::DrawEllipse:
+			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+			if (drawState == DrawState::DrawEllipse)
 				drawState = DrawState::DrawingEllipse;
+
+		case DrawState::DrawTriangle:
+			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+			if (drawState == DrawState::DrawTriangle)
+				drawState = DrawState::DrawingTriangle;
+		case DrawState::DrawSquare:
+			startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+			if (drawState == DrawState::DrawSquare)
+				drawState = DrawState::DrawingSquare;
 		}
 	}
 
 }
 	private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-		if ((drawState == DrawState::DrawingLine) || (drawState == DrawState::DrawingEllipse)) {
+		if ((drawState == DrawState::DrawingLine) || 
+			(drawState == DrawState::DrawingFreehand) || 
+			(drawState == DrawState::DrawingCircle) || 
+			(drawState == DrawState::DrawingEllipse) || 
+			(drawState == DrawState::DrawingTriangle) || 
+			(drawState == DrawState::DrawingSquare) ) {
 			if (tmpImage != nullptr) delete tmpImage;
 			tmpImage = (Bitmap^)bmp->Clone();
-			// Lock Bitmap Bits …
 			Rectangle rect = Rectangle(0, 0, tmpImage->Width, tmpImage->Height);
 			System::Drawing::Imaging::BitmapData^ bmpData =
 				tmpImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, tmpImage->PixelFormat);
-			// Using OpenCV: Create Image with data pointer
 			Mat image(tmpImage->Height, tmpImage->Width, CV_8UC3, bmpData->Scan0.ToPointer(), bmpData->Stride);
-			// Do OpenCV function
+
+			int dx = Math::Abs(startPoint->X - e->X);
+			int dy = Math::Abs(startPoint->Y - e->Y);
+			int mid = (startPoint->X+ Math::Abs(startPoint->X - e->X)/2);
 			switch (drawState) {
 			case DrawState::DrawingLine:
 				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(0, 255, 0));
 				break;
+
+			
+			case DrawState::DrawingFreehand:
+				
+				break;
+			
+			case DrawState::DrawingTriangle:
+
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(255, 0, 0));
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(0, 255, 0));
+				line(image, cv::Point(e->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(0, 0, 255));
+				break;
+
+			case DrawState::DrawingSquare:
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(startPoint->X, e->Y), CV_RGB(0, 255, 0));
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(0, 255, 0));
+				line(image, cv::Point(startPoint->X, e->Y), cv::Point(e->X, e->Y), CV_RGB(0, 255, 0));
+				line(image, cv::Point(e->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(0, 255, 0));
+				break;
+
+
+			
+			case DrawState::DrawingCircle:
+				ellipse(image, cv::Point(startPoint->X, startPoint->Y),
+					cv::Size(dx, dx),
+					Math::Atan2(dx, dx), 0, 360,
+					CV_RGB(0, 255, 0));
+
+				break;
+			
+
 			case DrawState::DrawingEllipse:
-				int dx = Math::Abs(startPoint->X - e->X);
-				int dy = Math::Abs(startPoint->Y - e->Y);
 				ellipse(image, cv::Point(startPoint->X, startPoint->Y),
 					cv::Size(dx, dy),
 					Math::Atan2(dy, dx), 0, 360,
 					CV_RGB(0, 255, 0));
+				
 				break;
+			
+			
 			}
 			// Unlock Bitmap Bits
 			tmpImage->UnlockBits(bmpData);
@@ -686,7 +773,12 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 
 	}
 	private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-		if ((drawState == DrawState::DrawingLine) || (drawState == DrawState::DrawingEllipse)) {
+		if ((drawState == DrawState::DrawingLine) ||
+			(drawState == DrawState::DrawingFreehand) ||
+			(drawState == DrawState::DrawingCircle) ||
+			(drawState == DrawState::DrawingEllipse) ||
+			(drawState == DrawState::DrawingTriangle) ||
+			(drawState == DrawState::DrawingSquare)) {
 			delete startPoint;
 			startPoint = nullptr;
 			delete bmp;
@@ -695,7 +787,7 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 			drawState = DrawState::NotDrawing;
 			Cursor = Cursors::Default;
 		}
-
 	}
+
 };
 }
