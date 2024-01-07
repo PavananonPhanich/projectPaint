@@ -1,9 +1,10 @@
-#pragma once
+#pragma 
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include "CameraForm.h"
+
 
 using namespace cv;
 
@@ -29,7 +30,32 @@ namespace projectPaint {
 			//TODO: Add the constructor code here
 			//
 		}
-	
+	private: System::Windows::Forms::FlowLayoutPanel^ sizeFlow;
+	private: System::Windows::Forms::FlowLayoutPanel^ typeFlow;
+	private: System::Windows::Forms::Button^ type_btn;
+
+	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ size_1;
+	private: System::Windows::Forms::Button^ size_3;
+	private: System::Windows::Forms::Button^ size_5;
+	private: System::Windows::Forms::Button^ size_8;
+	private: System::Windows::Forms::Timer^ timer;
+	private: System::Windows::Forms::Panel^ panel2;
+	private: System::Windows::Forms::Panel^ panel5;
+
+	private: System::Windows::Forms::Panel^ panel4;
+	private: System::Windows::Forms::Panel^ panel3;
+	private: System::Windows::Forms::Panel^ sizeBtn;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Timer^ timer1;
+
+
+	public:
+
+	public:
+
+
 	enum class DrawState {
 		NotDrawing,
 		DrawLine, DrawingLine,
@@ -40,26 +66,32 @@ namespace projectPaint {
 		DrawSquare,DrawingSquare
 	} drawState;
 
-	enum class SizeState {
-		Size1, Sizing1,
-		Size3, Sizing3,
-		Size5, Sizing5,
-		Size8, Sizing8
-	}sizeState;
+	int rgbColor(int r,int g,int b) {
+		int RedColor = r;
+		int GreenColor = g ;
+		int BlueColor = b ;
+
+		return 0;
+	}
+	
+	bool size_expand = false;
+	bool type_expand = false;
+	
+	
+	int sizeLine;
 
 	System::Drawing::Point^ startPoint;
-	private: System::Windows::Forms::Button^ type_btn;
+
 	private: System::Windows::Forms::Button^ eraser_btn;
 	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator2;
 	private: System::Windows::Forms::ToolStripMenuItem^ whiteCanvasBtn;
-	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
-
-
-	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 
 
-	public:
+
+
+
+		
 
 	public:
 		Bitmap^ tmpImage;
@@ -102,7 +134,7 @@ namespace projectPaint {
 
 	private: System::Windows::Forms::Panel^ pictureBoxPanel;
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Button^ size_btn;
+
 
 
 	private: System::Windows::Forms::Button^ fill_btn;
@@ -129,6 +161,7 @@ namespace projectPaint {
 	private: System::Windows::Forms::Button^ freehand_btn;
 
 	private: System::Windows::Forms::Button^ line_btn;
+private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -140,7 +173,7 @@ namespace projectPaint {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -149,14 +182,27 @@ namespace projectPaint {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->toolStripContainer1 = (gcnew System::Windows::Forms::ToolStripContainer());
+			this->typeFlow = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			this->type_btn = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->sizeFlow = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			this->sizeBtn = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->size_8 = (gcnew System::Windows::Forms::Button());
+			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->size_1 = (gcnew System::Windows::Forms::Button());
+			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->size_3 = (gcnew System::Windows::Forms::Button());
+			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->size_5 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxPanel = (gcnew System::Windows::Forms::Panel());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->eraser_btn = (gcnew System::Windows::Forms::Button());
-			this->type_btn = (gcnew System::Windows::Forms::Button());
 			this->triangle_btn = (gcnew System::Windows::Forms::Button());
 			this->circle_btn = (gcnew System::Windows::Forms::Button());
 			this->freehand_btn = (gcnew System::Windows::Forms::Button());
@@ -164,7 +210,6 @@ namespace projectPaint {
 			this->CameraBtn = (gcnew System::Windows::Forms::Button());
 			this->square_btn = (gcnew System::Windows::Forms::Button());
 			this->ellipse_btn = (gcnew System::Windows::Forms::Button());
-			this->size_btn = (gcnew System::Windows::Forms::Button());
 			this->fill_btn = (gcnew System::Windows::Forms::Button());
 			this->color_btn = (gcnew System::Windows::Forms::Button());
 			this->showColor = (gcnew System::Windows::Forms::Button());
@@ -184,13 +229,21 @@ namespace projectPaint {
 			this->openFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->colorDialog = (gcnew System::Windows::Forms::ColorDialog());
+			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->toolStripContainer1->ContentPanel->SuspendLayout();
 			this->toolStripContainer1->TopToolStripPanel->SuspendLayout();
 			this->toolStripContainer1->SuspendLayout();
+			this->typeFlow->SuspendLayout();
+			this->sizeFlow->SuspendLayout();
+			this->sizeBtn->SuspendLayout();
+			this->panel5->SuspendLayout();
+			this->panel4->SuspendLayout();
+			this->panel2->SuspendLayout();
+			this->panel3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->pictureBoxPanel->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			this->menuStrip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -199,6 +252,8 @@ namespace projectPaint {
 			// 
 			// toolStripContainer1.ContentPanel
 			// 
+			this->toolStripContainer1->ContentPanel->Controls->Add(this->typeFlow);
+			this->toolStripContainer1->ContentPanel->Controls->Add(this->sizeFlow);
 			this->toolStripContainer1->ContentPanel->Controls->Add(this->pictureBox);
 			this->toolStripContainer1->ContentPanel->Controls->Add(this->panel1);
 			this->toolStripContainer1->ContentPanel->Size = System::Drawing::Size(934, 467);
@@ -212,6 +267,190 @@ namespace projectPaint {
 			// toolStripContainer1.TopToolStripPanel
 			// 
 			this->toolStripContainer1->TopToolStripPanel->Controls->Add(this->menuStrip);
+			// 
+			// typeFlow
+			// 
+			this->typeFlow->Controls->Add(this->type_btn);
+			this->typeFlow->Controls->Add(this->button6);
+			this->typeFlow->Controls->Add(this->button5);
+			this->typeFlow->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
+			this->typeFlow->Location = System::Drawing::Point(344, 19);
+			this->typeFlow->Name = L"typeFlow";
+			this->typeFlow->Size = System::Drawing::Size(60, 60);
+			this->typeFlow->TabIndex = 18;
+			// 
+			// type_btn
+			// 
+			this->type_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->type_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->type_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->type_btn->Location = System::Drawing::Point(0, 0);
+			this->type_btn->Margin = System::Windows::Forms::Padding(0);
+			this->type_btn->Name = L"type_btn";
+			this->type_btn->Size = System::Drawing::Size(60, 60);
+			this->type_btn->TabIndex = 15;
+			this->type_btn->Text = L"Type";
+			this->type_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
+			this->type_btn->UseVisualStyleBackColor = false;
+			this->type_btn->Click += gcnew System::EventHandler(this, &MyForm::type_btn_Click);
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button5->Location = System::Drawing::Point(120, 0);
+			this->button5->Margin = System::Windows::Forms::Padding(0);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(60, 45);
+			this->button5->TabIndex = 16;
+			this->button5->Text = L"Dashed";
+			this->button5->UseVisualStyleBackColor = false;
+			// 
+			// button6
+			// 
+			this->button6->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->button6->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button6->Location = System::Drawing::Point(60, 0);
+			this->button6->Margin = System::Windows::Forms::Padding(0);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(60, 45);
+			this->button6->TabIndex = 17;
+			this->button6->Text = L"Solid";
+			this->button6->UseVisualStyleBackColor = false;
+			// 
+			// sizeFlow
+			// 
+			this->sizeFlow->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->sizeFlow->Controls->Add(this->sizeBtn);
+			this->sizeFlow->Controls->Add(this->panel5);
+			this->sizeFlow->Controls->Add(this->panel4);
+			this->sizeFlow->Controls->Add(this->panel2);
+			this->sizeFlow->Controls->Add(this->panel3);
+			this->sizeFlow->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
+			this->sizeFlow->Location = System::Drawing::Point(265, 19);
+			this->sizeFlow->Margin = System::Windows::Forms::Padding(0);
+			this->sizeFlow->Name = L"sizeFlow";
+			this->sizeFlow->Size = System::Drawing::Size(60, 60);
+			this->sizeFlow->TabIndex = 17;
+			// 
+			// sizeBtn
+			// 
+			this->sizeBtn->Controls->Add(this->button1);
+			this->sizeBtn->Location = System::Drawing::Point(0, 0);
+			this->sizeBtn->Margin = System::Windows::Forms::Padding(0);
+			this->sizeBtn->Name = L"sizeBtn";
+			this->sizeBtn->Size = System::Drawing::Size(60, 60);
+			this->sizeBtn->TabIndex = 13;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
+			this->button1->Location = System::Drawing::Point(0, 0);
+			this->button1->Margin = System::Windows::Forms::Padding(0);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(60, 60);
+			this->button1->TabIndex = 11;
+			this->button1->Text = L"Size";
+			this->button1->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::size_btn_Click);
+			// 
+			// panel5
+			// 
+			this->panel5->Controls->Add(this->size_8);
+			this->panel5->Location = System::Drawing::Point(60, 0);
+			this->panel5->Margin = System::Windows::Forms::Padding(0);
+			this->panel5->Name = L"panel5";
+			this->panel5->Size = System::Drawing::Size(60, 60);
+			this->panel5->TabIndex = 12;
+			// 
+			// size_8
+			// 
+			this->size_8->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->size_8->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->size_8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->size_8->Location = System::Drawing::Point(0, 0);
+			this->size_8->Margin = System::Windows::Forms::Padding(0);
+			this->size_8->Name = L"size_8";
+			this->size_8->Size = System::Drawing::Size(60, 60);
+			this->size_8->TabIndex = 10;
+			this->size_8->Text = L"8px";
+			this->size_8->UseVisualStyleBackColor = false;
+			this->size_8->Click += gcnew System::EventHandler(this, &MyForm::size_btn_Click);
+			// 
+			// panel4
+			// 
+			this->panel4->Controls->Add(this->size_1);
+			this->panel4->Location = System::Drawing::Point(120, 0);
+			this->panel4->Margin = System::Windows::Forms::Padding(0);
+			this->panel4->Name = L"panel4";
+			this->panel4->Size = System::Drawing::Size(60, 60);
+			this->panel4->TabIndex = 12;
+			// 
+			// size_1
+			// 
+			this->size_1->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->size_1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->size_1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->size_1->Location = System::Drawing::Point(0, 0);
+			this->size_1->Margin = System::Windows::Forms::Padding(0);
+			this->size_1->Name = L"size_1";
+			this->size_1->Size = System::Drawing::Size(60, 60);
+			this->size_1->TabIndex = 7;
+			this->size_1->Text = L"1px";
+			this->size_1->UseVisualStyleBackColor = false;
+			this->size_1->Click += gcnew System::EventHandler(this, &MyForm::size_btn_Click);
+			// 
+			// panel2
+			// 
+			this->panel2->Controls->Add(this->size_3);
+			this->panel2->Location = System::Drawing::Point(180, 0);
+			this->panel2->Margin = System::Windows::Forms::Padding(0);
+			this->panel2->Name = L"panel2";
+			this->panel2->Size = System::Drawing::Size(60, 60);
+			this->panel2->TabIndex = 11;
+			// 
+			// size_3
+			// 
+			this->size_3->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->size_3->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->size_3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->size_3->Location = System::Drawing::Point(0, 0);
+			this->size_3->Margin = System::Windows::Forms::Padding(0);
+			this->size_3->Name = L"size_3";
+			this->size_3->Size = System::Drawing::Size(60, 60);
+			this->size_3->TabIndex = 8;
+			this->size_3->Text = L"3px";
+			this->size_3->UseVisualStyleBackColor = false;
+			this->size_3->Click += gcnew System::EventHandler(this, &MyForm::size_btn_Click);
+			// 
+			// panel3
+			// 
+			this->panel3->Controls->Add(this->size_5);
+			this->panel3->Location = System::Drawing::Point(240, 0);
+			this->panel3->Margin = System::Windows::Forms::Padding(0);
+			this->panel3->Name = L"panel3";
+			this->panel3->Size = System::Drawing::Size(60, 60);
+			this->panel3->TabIndex = 12;
+			// 
+			// size_5
+			// 
+			this->size_5->BackColor = System::Drawing::SystemColors::ButtonFace;
+			this->size_5->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->size_5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->size_5->Location = System::Drawing::Point(0, 0);
+			this->size_5->Margin = System::Windows::Forms::Padding(0);
+			this->size_5->Name = L"size_5";
+			this->size_5->Size = System::Drawing::Size(60, 60);
+			this->size_5->TabIndex = 9;
+			this->size_5->Text = L"5px";
+			this->size_5->UseVisualStyleBackColor = false;
+			this->size_5->Click += gcnew System::EventHandler(this, &MyForm::size_btn_Click);
 			// 
 			// pictureBox
 			// 
@@ -238,10 +477,7 @@ namespace projectPaint {
 			// 
 			this->pictureBoxPanel->AutoScroll = true;
 			this->pictureBoxPanel->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->pictureBoxPanel->Controls->Add(this->comboBox1);
-			this->pictureBoxPanel->Controls->Add(this->numericUpDown1);
 			this->pictureBoxPanel->Controls->Add(this->eraser_btn);
-			this->pictureBoxPanel->Controls->Add(this->type_btn);
 			this->pictureBoxPanel->Controls->Add(this->triangle_btn);
 			this->pictureBoxPanel->Controls->Add(this->circle_btn);
 			this->pictureBoxPanel->Controls->Add(this->freehand_btn);
@@ -249,7 +485,6 @@ namespace projectPaint {
 			this->pictureBoxPanel->Controls->Add(this->CameraBtn);
 			this->pictureBoxPanel->Controls->Add(this->square_btn);
 			this->pictureBoxPanel->Controls->Add(this->ellipse_btn);
-			this->pictureBoxPanel->Controls->Add(this->size_btn);
 			this->pictureBoxPanel->Controls->Add(this->fill_btn);
 			this->pictureBoxPanel->Controls->Add(this->color_btn);
 			this->pictureBoxPanel->Controls->Add(this->showColor);
@@ -258,21 +493,6 @@ namespace projectPaint {
 			this->pictureBoxPanel->Name = L"pictureBoxPanel";
 			this->pictureBoxPanel->Size = System::Drawing::Size(934, 100);
 			this->pictureBoxPanel->TabIndex = 2;
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(344, 78);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(60, 21);
-			this->comboBox1->TabIndex = 10;
-			// 
-			// numericUpDown1
-			// 
-			this->numericUpDown1->Location = System::Drawing::Point(265, 78);
-			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(60, 20);
-			this->numericUpDown1->TabIndex = 10;
 			// 
 			// eraser_btn
 			// 
@@ -285,18 +505,6 @@ namespace projectPaint {
 			this->eraser_btn->Text = L"Eraser";
 			this->eraser_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->eraser_btn->UseVisualStyleBackColor = false;
-			// 
-			// type_btn
-			// 
-			this->type_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
-			this->type_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->type_btn->Location = System::Drawing::Point(344, 19);
-			this->type_btn->Name = L"type_btn";
-			this->type_btn->Size = System::Drawing::Size(60, 60);
-			this->type_btn->TabIndex = 15;
-			this->type_btn->Text = L"Type";
-			this->type_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->type_btn->UseVisualStyleBackColor = false;
 			// 
 			// triangle_btn
 			// 
@@ -389,19 +597,6 @@ namespace projectPaint {
 			this->ellipse_btn->UseVisualStyleBackColor = false;
 			this->ellipse_btn->Click += gcnew System::EventHandler(this, &MyForm::ellipse_btn_Click);
 			// 
-			// size_btn
-			// 
-			this->size_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
-			this->size_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->size_btn->Location = System::Drawing::Point(265, 19);
-			this->size_btn->Name = L"size_btn";
-			this->size_btn->Size = System::Drawing::Size(60, 60);
-			this->size_btn->TabIndex = 6;
-			this->size_btn->Text = L"Size";
-			this->size_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->size_btn->UseVisualStyleBackColor = false;
-			this->size_btn->Visible = false;
-			// 
 			// fill_btn
 			// 
 			this->fill_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
@@ -465,45 +660,45 @@ namespace projectPaint {
 			// openBtn
 			// 
 			this->openBtn->Name = L"openBtn";
-			this->openBtn->Size = System::Drawing::Size(180, 22);
+			this->openBtn->Size = System::Drawing::Size(146, 22);
 			this->openBtn->Text = L"&Open";
 			this->openBtn->Click += gcnew System::EventHandler(this, &MyForm::openBtn_Click);
 			// 
 			// saveBtn
 			// 
 			this->saveBtn->Name = L"saveBtn";
-			this->saveBtn->Size = System::Drawing::Size(180, 22);
+			this->saveBtn->Size = System::Drawing::Size(146, 22);
 			this->saveBtn->Text = L"&Save";
 			this->saveBtn->Click += gcnew System::EventHandler(this, &MyForm::saveBtn_Click);
 			// 
 			// saveAsBtn
 			// 
 			this->saveAsBtn->Name = L"saveAsBtn";
-			this->saveAsBtn->Size = System::Drawing::Size(180, 22);
+			this->saveAsBtn->Size = System::Drawing::Size(146, 22);
 			this->saveAsBtn->Text = L"&Save As";
 			this->saveAsBtn->Click += gcnew System::EventHandler(this, &MyForm::saveAsBtn_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this->toolStripSeparator2->Name = L"toolStripSeparator2";
-			this->toolStripSeparator2->Size = System::Drawing::Size(177, 6);
+			this->toolStripSeparator2->Size = System::Drawing::Size(143, 6);
 			// 
 			// whiteCanvasBtn
 			// 
 			this->whiteCanvasBtn->Name = L"whiteCanvasBtn";
-			this->whiteCanvasBtn->Size = System::Drawing::Size(180, 22);
+			this->whiteCanvasBtn->Size = System::Drawing::Size(146, 22);
 			this->whiteCanvasBtn->Text = L"White Canvas";
 			this->whiteCanvasBtn->Click += gcnew System::EventHandler(this, &MyForm::whiteCanvasBtn_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(177, 6);
+			this->toolStripSeparator1->Size = System::Drawing::Size(143, 6);
 			// 
 			// exitBtn
 			// 
 			this->exitBtn->Name = L"exitBtn";
-			this->exitBtn->Size = System::Drawing::Size(180, 22);
+			this->exitBtn->Size = System::Drawing::Size(146, 22);
 			this->exitBtn->Text = L"&Exit";
 			this->exitBtn->Click += gcnew System::EventHandler(this, &MyForm::exitBtn_Click);
 			// 
@@ -547,6 +742,15 @@ namespace projectPaint {
 			this->saveFileDialog->DefaultExt = L"png";
 			this->saveFileDialog->Filter = L"Image files|*.jpg;*.png";
 			// 
+			// timer
+			// 
+			this->timer->Interval = 1;
+			this->timer->Tick += gcnew System::EventHandler(this, &MyForm::timer_Tick);
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &MyForm::timer_Tick1);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -561,10 +765,16 @@ namespace projectPaint {
 			this->toolStripContainer1->TopToolStripPanel->PerformLayout();
 			this->toolStripContainer1->ResumeLayout(false);
 			this->toolStripContainer1->PerformLayout();
+			this->typeFlow->ResumeLayout(false);
+			this->sizeFlow->ResumeLayout(false);
+			this->sizeBtn->ResumeLayout(false);
+			this->panel5->ResumeLayout(false);
+			this->panel4->ResumeLayout(false);
+			this->panel2->ResumeLayout(false);
+			this->panel3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 			this->panel1->ResumeLayout(false);
 			this->pictureBoxPanel->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			this->menuStrip->ResumeLayout(false);
 			this->menuStrip->PerformLayout();
 			this->ResumeLayout(false);
@@ -652,9 +862,12 @@ namespace projectPaint {
 	}
 
 	private: System::Void color_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+
 		if (colorDialog->ShowDialog() == Windows::Forms::DialogResult::OK) { 
 			Color^ new_color = colorDialog->Color;
 			showColor->BackColor = colorDialog->Color;
+			
+			
 		}
 	}
 	private: System::Void line_btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -754,7 +967,7 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 
 			
 			case DrawState::DrawingFreehand:
-				Pen p = new Pen(colorDialog->Color);
+				
 				break;
 			
 			case DrawState::DrawingTriangle:
@@ -816,10 +1029,48 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 	}
 	
 	private: System::Void whiteCanvasBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		/*Width ^ 930;
-		Height ^ 650;
-		Bitmap^ bpm = gcnew Bitmap(pictureBox->Width, pictureBox->Height);
-		Graphics^ g = Graphics->FromImage(bmp);*/
+		Mat image = Mat::zeros(930, 530, CV_8UC3);
 	}
+	
+	
+	private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (size_expand == false) {
+			sizeFlow->Height += 15;
+			if (sizeFlow->Height >= 300) {
+				timer->Stop() ;
+				size_expand = true;
+			}
+		}
+		else {
+			sizeFlow->Height -= 15;
+			if (sizeFlow->Height <= 60) {
+				timer->Stop();
+				size_expand  = false;
+			}
+		}
+	}
+	private: System::Void timer_Tick1(System::Object^ sender, System::EventArgs^ e) {
+		if (type_expand == false) {
+			typeFlow->Height += 15;
+			if (typeFlow->Height >= 150) {
+				timer1->Stop();
+				type_expand = true;
+			}
+		}
+		else {
+			typeFlow->Height -= 15;
+			if (typeFlow->Height <= 60) {
+				timer1->Stop();
+				type_expand = false;
+			}
+		}
+	}
+	private: System::Void size_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		timer->Start();
+	}	
+	private: System::Void type_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		timer1->Start();
+	}
+
 };
 }
