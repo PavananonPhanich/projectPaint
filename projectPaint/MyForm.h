@@ -59,6 +59,7 @@ namespace projectPaint {
 
 
 
+
 	enum class DrawState {
 		NotDrawing,
 		DrawLine, DrawingLine,
@@ -93,7 +94,7 @@ namespace projectPaint {
 
 	System::Drawing::Point^ startPoint;
 
-	private: System::Windows::Forms::Button^ eraser_btn;
+
 	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator2;
 	private: System::Windows::Forms::ToolStripMenuItem^ whiteCanvasBtn;
 
@@ -194,6 +195,7 @@ private: System::ComponentModel::IContainer^ components;
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->toolStripContainer1 = (gcnew System::Windows::Forms::ToolStripContainer());
 			this->typeFlow = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->type_btn = (gcnew System::Windows::Forms::Button());
@@ -213,7 +215,6 @@ private: System::ComponentModel::IContainer^ components;
 			this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBoxPanel = (gcnew System::Windows::Forms::Panel());
-			this->eraser_btn = (gcnew System::Windows::Forms::Button());
 			this->triangle_btn = (gcnew System::Windows::Forms::Button());
 			this->circle_btn = (gcnew System::Windows::Forms::Button());
 			this->freehand_btn = (gcnew System::Windows::Forms::Button());
@@ -309,12 +310,17 @@ private: System::ComponentModel::IContainer^ components;
 			this->button6->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->button6->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(222)));
+			this->button6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button6.Image")));
+			this->button6->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->button6->Location = System::Drawing::Point(60, 0);
 			this->button6->Margin = System::Windows::Forms::Padding(0);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(60, 45);
 			this->button6->TabIndex = 17;
 			this->button6->Text = L"Solid";
+			this->button6->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->button6->UseVisualStyleBackColor = false;
 			// 
 			// button5
@@ -322,12 +328,17 @@ private: System::ComponentModel::IContainer^ components;
 			this->button5->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(222)));
+			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
+			this->button5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->button5->Location = System::Drawing::Point(120, 0);
 			this->button5->Margin = System::Windows::Forms::Padding(0);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(60, 45);
 			this->button5->TabIndex = 16;
 			this->button5->Text = L"Dashed";
+			this->button5->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->button5->UseVisualStyleBackColor = false;
 			// 
 			// sizeFlow
@@ -359,6 +370,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->size_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->size_btn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->size_btn->FlatAppearance->BorderSize = 0;
+			this->size_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"size_btn.Image")));
 			this->size_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->size_btn->Location = System::Drawing::Point(0, 0);
 			this->size_btn->Margin = System::Windows::Forms::Padding(0);
@@ -390,6 +402,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->size_1->Size = System::Drawing::Size(60, 60);
 			this->size_1->TabIndex = 7;
 			this->size_1->Text = L"1px";
+			this->size_1->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->size_1->UseVisualStyleBackColor = false;
 			this->size_1->Click += gcnew System::EventHandler(this, &MyForm::size_1_Click);
 			// 
@@ -413,6 +426,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->size_3->Size = System::Drawing::Size(60, 60);
 			this->size_3->TabIndex = 8;
 			this->size_3->Text = L"3px";
+			this->size_3->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->size_3->UseVisualStyleBackColor = false;
 			this->size_3->Click += gcnew System::EventHandler(this, &MyForm::size_3_Click);
 			// 
@@ -436,6 +450,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->size_5->Size = System::Drawing::Size(60, 60);
 			this->size_5->TabIndex = 9;
 			this->size_5->Text = L"5px";
+			this->size_5->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->size_5->UseVisualStyleBackColor = false;
 			this->size_5->Click += gcnew System::EventHandler(this, &MyForm::size_5_Click);
 			// 
@@ -459,12 +474,14 @@ private: System::ComponentModel::IContainer^ components;
 			this->size_8->Size = System::Drawing::Size(60, 60);
 			this->size_8->TabIndex = 10;
 			this->size_8->Text = L"8px";
+			this->size_8->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->size_8->UseVisualStyleBackColor = false;
 			this->size_8->Click += gcnew System::EventHandler(this, &MyForm::size_8_Click);
 			// 
 			// pictureBox
 			// 
 			this->pictureBox->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->pictureBox->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox.Image")));
 			this->pictureBox->Location = System::Drawing::Point(0, 100);
 			this->pictureBox->Name = L"pictureBox";
 			this->pictureBox->Size = System::Drawing::Size(934, 367);
@@ -487,7 +504,6 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->pictureBoxPanel->AutoScroll = true;
 			this->pictureBoxPanel->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->pictureBoxPanel->Controls->Add(this->eraser_btn);
 			this->pictureBoxPanel->Controls->Add(this->triangle_btn);
 			this->pictureBoxPanel->Controls->Add(this->circle_btn);
 			this->pictureBoxPanel->Controls->Add(this->freehand_btn);
@@ -504,22 +520,12 @@ private: System::ComponentModel::IContainer^ components;
 			this->pictureBoxPanel->Size = System::Drawing::Size(934, 100);
 			this->pictureBoxPanel->TabIndex = 2;
 			// 
-			// eraser_btn
-			// 
-			this->eraser_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
-			this->eraser_btn->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->eraser_btn->Location = System::Drawing::Point(189, 19);
-			this->eraser_btn->Name = L"eraser_btn";
-			this->eraser_btn->Size = System::Drawing::Size(60, 60);
-			this->eraser_btn->TabIndex = 16;
-			this->eraser_btn->Text = L"Eraser";
-			this->eraser_btn->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
-			this->eraser_btn->UseVisualStyleBackColor = false;
-			// 
 			// triangle_btn
 			// 
 			this->triangle_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->triangle_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->triangle_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"triangle_btn.Image")));
+			this->triangle_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->triangle_btn->Location = System::Drawing::Point(686, 19);
 			this->triangle_btn->Name = L"triangle_btn";
 			this->triangle_btn->Size = System::Drawing::Size(60, 60);
@@ -533,6 +539,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->circle_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->circle_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->circle_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"circle_btn.Image")));
+			this->circle_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->circle_btn->Location = System::Drawing::Point(554, 19);
 			this->circle_btn->Name = L"circle_btn";
 			this->circle_btn->Size = System::Drawing::Size(60, 60);
@@ -546,6 +554,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->freehand_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->freehand_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->freehand_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"freehand_btn.Image")));
+			this->freehand_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->freehand_btn->Location = System::Drawing::Point(488, 19);
 			this->freehand_btn->Name = L"freehand_btn";
 			this->freehand_btn->Size = System::Drawing::Size(60, 60);
@@ -559,6 +569,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->line_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->line_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->line_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"line_btn.Image")));
+			this->line_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->line_btn->Location = System::Drawing::Point(422, 19);
 			this->line_btn->Name = L"line_btn";
 			this->line_btn->Size = System::Drawing::Size(60, 60);
@@ -572,6 +584,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->CameraBtn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->CameraBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->CameraBtn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"CameraBtn.Image")));
+			this->CameraBtn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->CameraBtn->Location = System::Drawing::Point(849, 19);
 			this->CameraBtn->Name = L"CameraBtn";
 			this->CameraBtn->Size = System::Drawing::Size(60, 60);
@@ -585,6 +599,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->square_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->square_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->square_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"square_btn.Image")));
+			this->square_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->square_btn->Location = System::Drawing::Point(752, 19);
 			this->square_btn->Name = L"square_btn";
 			this->square_btn->Size = System::Drawing::Size(60, 60);
@@ -598,6 +614,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->ellipse_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->ellipse_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->ellipse_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"ellipse_btn.Image")));
+			this->ellipse_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->ellipse_btn->Location = System::Drawing::Point(620, 19);
 			this->ellipse_btn->Name = L"ellipse_btn";
 			this->ellipse_btn->Size = System::Drawing::Size(60, 60);
@@ -611,6 +629,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->fill_btn->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->fill_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->fill_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"fill_btn.Image")));
+			this->fill_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->fill_btn->Location = System::Drawing::Point(123, 19);
 			this->fill_btn->Name = L"fill_btn";
 			this->fill_btn->Size = System::Drawing::Size(60, 60);
@@ -628,6 +648,8 @@ private: System::ComponentModel::IContainer^ components;
 			this->color_btn->FlatAppearance->BorderSize = 2;
 			this->color_btn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::DarkGray;
 			this->color_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Gray;
+			this->color_btn->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"color_btn.Image")));
+			this->color_btn->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->color_btn->Location = System::Drawing::Point(57, 19);
 			this->color_btn->Name = L"color_btn";
 			this->color_btn->Size = System::Drawing::Size(60, 60);
@@ -639,12 +661,11 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// showColor
 			// 
-			this->showColor->Location = System::Drawing::Point(3, 24);
+			this->showColor->Location = System::Drawing::Point(4, 25);
 			this->showColor->Name = L"showColor";
 			this->showColor->Size = System::Drawing::Size(50, 50);
 			this->showColor->TabIndex = 2;
 			this->showColor->UseVisualStyleBackColor = true;
-
 			// 
 			// menuStrip
 			// 
@@ -991,6 +1012,7 @@ private: System::ComponentModel::IContainer^ components;
 			switch (drawState) {
 			case DrawState::DrawingLine:
 				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r,g,b),size_num );
+
 				break;
 
 			
