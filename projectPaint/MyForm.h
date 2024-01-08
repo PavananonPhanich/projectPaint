@@ -891,9 +891,6 @@ private: System::ComponentModel::IContainer^ components;
 			greenValue = colorDialog->Color.G;
 			blueValue = colorDialog->Color.B;
 			
-
-			
-			
 		}
 	}
 	private: System::Void line_btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -968,8 +965,8 @@ private: System::ComponentModel::IContainer^ components;
 
 	}
 
-	private: 
-		int size_num = 20;
+	
+	int size_num = 1;
 	   
 	private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		if ((drawState == DrawState::DrawingLine) || 
@@ -993,7 +990,7 @@ private: System::ComponentModel::IContainer^ components;
 			int b = blueValue;
 			switch (drawState) {
 			case DrawState::DrawingLine:
-				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r,g,b) );
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r,g,b),size_num );
 				break;
 
 			
@@ -1003,16 +1000,16 @@ private: System::ComponentModel::IContainer^ components;
 			
 			case DrawState::DrawingTriangle:
 
-				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(r, g, b));
-				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(r, g, b));
-				line(image, cv::Point(e->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(r, g, b));
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(r, g, b), size_num);
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(r, g, b), size_num);
+				line(image, cv::Point(e->X, startPoint->Y), cv::Point(mid, e->Y), CV_RGB(r, g, b), size_num);
 				break;
 
 			case DrawState::DrawingSquare:
-				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(startPoint->X, e->Y), CV_RGB(r, g, b));
-				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(r, g, b));
-				line(image, cv::Point(startPoint->X, e->Y), cv::Point(e->X, e->Y), CV_RGB(r, g, b));
-				line(image, cv::Point(e->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r, g, b));
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(startPoint->X, e->Y), CV_RGB(r, g, b), size_num);
+				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, startPoint->Y), CV_RGB(r, g, b), size_num);
+				line(image, cv::Point(startPoint->X, e->Y), cv::Point(e->X, e->Y), CV_RGB(r, g, b), size_num);
+				line(image, cv::Point(e->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r, g, b), size_num);
 				break;
 
 
@@ -1021,7 +1018,7 @@ private: System::ComponentModel::IContainer^ components;
 				ellipse(image, cv::Point(startPoint->X, startPoint->Y),
 					cv::Size(dx, dx),
 					Math::Atan2(dx, dx), 0, 360,
-					CV_RGB(r, g, b));
+					CV_RGB(r, g, b), size_num);
 
 				break;
 			
@@ -1030,7 +1027,7 @@ private: System::ComponentModel::IContainer^ components;
 				ellipse(image, cv::Point(startPoint->X, startPoint->Y),
 					cv::Size(dx, dy),
 					Math::Atan2(dy, dx), 0, 360,
-					CV_RGB(r, g, b));
+					CV_RGB(r, g, b), size_num);
 				
 				break;
 			
@@ -1078,22 +1075,22 @@ private: System::ComponentModel::IContainer^ components;
 	}
 	private: System::Void size_1_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (size_expand == true) {
-			int size_num = 1;
+			size_num = 1;
 		}
 	}
 	private: System::Void size_3_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (size_expand == true) {
-			int size_num = 3;
+			size_num = 3;
 		}
 	}
 	private: System::Void size_5_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (size_expand == true) {
-			int size_num = 5;
+			size_num = 5;
 		}
 	}
 	private: System::Void size_8_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (size_expand == true) {
-			int size_num = 8;
+			size_num = 8;
 		}
 	}
 
