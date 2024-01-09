@@ -67,7 +67,8 @@ namespace projectPaint {
 		DrawEllipse, DrawingEllipse,
 		DrawCircle, DrawingCircle,
 		DrawTriangle, DrawingTriangle,
-		DrawSquare,DrawingSquare
+		DrawSquare,DrawingSquare,
+		DrawFill,DrawingFill
 	} drawState;
 
 	int rgbColor(int r,int g,int b) {
@@ -719,8 +720,9 @@ private: System::ComponentModel::IContainer^ components;
 			// whiteCanvasBtn
 			// 
 			this->whiteCanvasBtn->Name = L"whiteCanvasBtn";
-			this->whiteCanvasBtn->Size = System::Drawing::Size(146, 22);
+			this->whiteCanvasBtn->Size = System::Drawing::Size(180, 22);
 			this->whiteCanvasBtn->Text = L"White Canvas";
+			this->whiteCanvasBtn->Click += gcnew System::EventHandler(this, &MyForm::whiteCanvasBtn_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -875,6 +877,18 @@ private: System::ComponentModel::IContainer^ components;
 		Mat image(bmp->Height, bmp->Width, CV_8UC3, bmpData->Scan0.ToPointer(), bmpData->Stride);
 		// Do OpenCV function
 		cvtColor(image, image, COLOR_BGR2GRAY);
+		cv::Mat grayImage(image.rows, image.cols, CV_8U);
+		for (int y = 0; y < image.rows; y++) {
+			for (int x = 0; x < image.cols; x++) {
+				// Compute weighted sum for grayscale intensity
+				uchar grayIntensity = static_cast<uchar>(
+					0.299 * image.at<cv::Vec3b>(y, x)[2] +
+					0.587 * image.at<cv::Vec3b>(y, x)[1] +
+					0.114 * image.at<cv::Vec3b>(y, x)[0]);
+				// Set the grayscale intensity in the output image
+				grayImage.at<uchar>(y, x) = grayIntensity;
+			}
+		}
 		// Unlock Bitmap Bits
 		bmp->UnlockBits(bmpData);
 		pictureBox->Image = bmp; // Show result
@@ -952,7 +966,14 @@ private: System::ComponentModel::IContainer^ components;
 			Cursor = Cursors::Cross;
 		}
 	}
-
+	
+	private: System::Void fill_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (bmp != nullptr) {
+			drawState = DrawState::DrawFill;
+			Cursor = Cursors::Cross;
+		}
+	}
+	
 	private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		if (bmp != nullptr) {
 			switch (drawState) {
@@ -981,10 +1002,17 @@ private: System::ComponentModel::IContainer^ components;
 				startPoint = gcnew System::Drawing::Point(e->X, e->Y);
 				if (drawState == DrawState::DrawSquare)
 					drawState = DrawState::DrawingSquare;
+			case DrawState::DrawFill:
+				startPoint = gcnew System::Drawing::Point(e->X, e->Y);
+				if (drawState == DrawState::DrawFill)
+					drawState = DrawState::DrawingFill;
+
 			}
 		}
 
 	}
+
+	
 
 	
 	int size_num = 1;
@@ -1009,6 +1037,7 @@ private: System::ComponentModel::IContainer^ components;
 			int r = redValue ;
 			int g = greenValue;
 			int b = blueValue;
+
 			switch (drawState) {
 			case DrawState::DrawingLine:
 				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r,g,b),size_num );
@@ -1052,8 +1081,10 @@ private: System::ComponentModel::IContainer^ components;
 					CV_RGB(r, g, b), size_num);
 				
 				break;
-			
-			
+			case DrawState::DrawFill:
+				floodFill(image, image, cv::Point(startPoint->X, startPoint->Y), CV_RGB(r, g, b));
+				break;
+
 			}
 			// Unlock Bitmap Bits
 			tmpImage->UnlockBits(bmpData);
@@ -1141,9 +1172,17 @@ private: System::ComponentModel::IContainer^ components;
 	}
 
 		
-	private: System::Void fill_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-		
-	}
+	
 
+	private: System::Void whiteCanvasBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		//Bitmap^ image = " " ;
+		//// Convert image to 24 bits RGB
+		//bmp = gcnew Bitmap(image->Size.Width, image->Size.Height, Imaging::PixelFormat::Format24bppRgb);
+		//bmp->SetResolution(image->HorizontalResolution, image->VerticalResolution);
+		//Graphics^ g = Graphics::FromImage(bmp);
+		//g->DrawImage(image, 0, 0);
+		//delete image;
+		//pictureBox->Image = bmp;
+	}
 };
 }
