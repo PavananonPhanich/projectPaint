@@ -68,7 +68,7 @@ namespace projectPaint {
 		DrawCircle, DrawingCircle,
 		DrawTriangle, DrawingTriangle,
 		DrawSquare,DrawingSquare,
-		DrawFill,DrawingFill
+		DrawFill
 	} drawState;
 
 	int rgbColor(int r,int g,int b) {
@@ -83,13 +83,6 @@ namespace projectPaint {
 
 	bool size_expand = false;
 	bool type_expand = false;
-	
-	enum class SizeState {
-		sizeOne,sizingOne,
-		sizeThree,sizingThree,
-		sizeFive,sizingFive,
-		sizeEight,sizingEight
-	} sizeState;
 	
 
 	System::Drawing::Point^ startPoint;
@@ -704,45 +697,45 @@ private: System::ComponentModel::IContainer^ components;
 			// openBtn
 			// 
 			this->openBtn->Name = L"openBtn";
-			this->openBtn->Size = System::Drawing::Size(180, 22);
+			this->openBtn->Size = System::Drawing::Size(146, 22);
 			this->openBtn->Text = L"&Open";
 			this->openBtn->Click += gcnew System::EventHandler(this, &MyForm::openBtn_Click);
 			// 
 			// saveBtn
 			// 
 			this->saveBtn->Name = L"saveBtn";
-			this->saveBtn->Size = System::Drawing::Size(180, 22);
+			this->saveBtn->Size = System::Drawing::Size(146, 22);
 			this->saveBtn->Text = L"&Save";
 			this->saveBtn->Click += gcnew System::EventHandler(this, &MyForm::saveBtn_Click);
 			// 
 			// saveAsBtn
 			// 
 			this->saveAsBtn->Name = L"saveAsBtn";
-			this->saveAsBtn->Size = System::Drawing::Size(180, 22);
+			this->saveAsBtn->Size = System::Drawing::Size(146, 22);
 			this->saveAsBtn->Text = L"&Save As";
 			this->saveAsBtn->Click += gcnew System::EventHandler(this, &MyForm::saveAsBtn_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this->toolStripSeparator2->Name = L"toolStripSeparator2";
-			this->toolStripSeparator2->Size = System::Drawing::Size(177, 6);
+			this->toolStripSeparator2->Size = System::Drawing::Size(143, 6);
 			// 
 			// whiteCanvasBtn
 			// 
 			this->whiteCanvasBtn->Name = L"whiteCanvasBtn";
-			this->whiteCanvasBtn->Size = System::Drawing::Size(180, 22);
+			this->whiteCanvasBtn->Size = System::Drawing::Size(146, 22);
 			this->whiteCanvasBtn->Text = L"White Canvas";
 			this->whiteCanvasBtn->Click += gcnew System::EventHandler(this, &MyForm::whiteCanvasBtn_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(177, 6);
+			this->toolStripSeparator1->Size = System::Drawing::Size(143, 6);
 			// 
 			// exitBtn
 			// 
 			this->exitBtn->Name = L"exitBtn";
-			this->exitBtn->Size = System::Drawing::Size(180, 22);
+			this->exitBtn->Size = System::Drawing::Size(146, 22);
 			this->exitBtn->Text = L"&Exit";
 			this->exitBtn->Click += gcnew System::EventHandler(this, &MyForm::exitBtn_Click);
 			// 
@@ -759,21 +752,21 @@ private: System::ComponentModel::IContainer^ components;
 			// hsvBtn
 			// 
 			this->hsvBtn->Name = L"hsvBtn";
-			this->hsvBtn->Size = System::Drawing::Size(180, 22);
+			this->hsvBtn->Size = System::Drawing::Size(98, 22);
 			this->hsvBtn->Text = L"HSV";
 			this->hsvBtn->Click += gcnew System::EventHandler(this, &MyForm::hsvBtn_Click);
 			// 
 			// rgbBtn
 			// 
 			this->rgbBtn->Name = L"rgbBtn";
-			this->rgbBtn->Size = System::Drawing::Size(180, 22);
+			this->rgbBtn->Size = System::Drawing::Size(98, 22);
 			this->rgbBtn->Text = L"RGB";
 			this->rgbBtn->Click += gcnew System::EventHandler(this, &MyForm::rgbBtn_Click);
 			// 
 			// grayBtn
 			// 
 			this->grayBtn->Name = L"grayBtn";
-			this->grayBtn->Size = System::Drawing::Size(180, 22);
+			this->grayBtn->Size = System::Drawing::Size(98, 22);
 			this->grayBtn->Text = L"Gray";
 			this->grayBtn->Click += gcnew System::EventHandler(this, &MyForm::grayBtn_Click);
 			// 
@@ -1020,15 +1013,26 @@ private: System::ComponentModel::IContainer^ components;
 			case DrawState::DrawFill:
 				startPoint = gcnew System::Drawing::Point(e->X, e->Y);
 				if (drawState == DrawState::DrawFill)
-					drawState = DrawState::DrawingFill;
-
+					if (tmpImage != nullptr)
+					{
+						delete tmpImage;
+					}
+					tmpImage = (Bitmap^)bmp->Clone();
+					Rectangle rect = Rectangle(0, 0, tmpImage->Width, tmpImage->Height);
+					System::Drawing::Imaging::BitmapData^ bmpData =
+						tmpImage->LockBits(rect, System::Drawing::Imaging::ImageLockMode::ReadWrite, tmpImage->PixelFormat);
+					Mat image(tmpImage->Height, tmpImage->Width, CV_8UC3, bmpData->Scan0.ToPointer(), bmpData->Stride);
+					int r = redValue;
+					int g = greenValue;
+					int b = blueValue;
+					floodFill(image, cv::Point(startPoint->X, startPoint->Y), CV_RGB(r, g, b), 0, cv::Scalar(0), cv::Scalar(50), 4);
+					// Unlock Bitmap Bits
+					tmpImage->UnlockBits(bmpData);
+					pictureBox->Image = tmpImage; // Show result
 			}
 		}
 
 	}
-
-	
-
 	
 	int size_num = 1;
 	int x= 0, y= 0;
@@ -1054,8 +1058,7 @@ private: System::ComponentModel::IContainer^ components;
 			int r = redValue ;
 			int g = greenValue;
 			int b = blueValue;
-
-			
+			Mat grayImage;
 			switch (drawState) {
 			case DrawState::DrawingLine:
 				line(image, cv::Point(startPoint->X, startPoint->Y), cv::Point(e->X, e->Y), CV_RGB(r,g,b),size_num );
@@ -1092,11 +1095,7 @@ private: System::ComponentModel::IContainer^ components;
 					Math::Atan2(dy, dx), 0, 360,
 					CV_RGB(r, g, b), size_num);
 				
-				break;
-			case DrawState::DrawFill:
-				//floodFill(image, image, cv::Point(startPoint->X, startPoint->Y), CV_RGB(r, g, b), 0, cv::Scalar(), cv::Scalar(), 4 | cv::FLOODFILL_MASK_ONLY | (fillValue << 8));
-				break;
-
+				break;			
 			}
 			// Unlock Bitmap Bits
 			tmpImage->UnlockBits(bmpData);
@@ -1171,6 +1170,7 @@ private: System::ComponentModel::IContainer^ components;
 			(drawState == DrawState::DrawingCircle) ||
 			(drawState == DrawState::DrawingEllipse) ||
 			(drawState == DrawState::DrawingTriangle) ||
+			(drawState == DrawState::DrawFill) ||
 			(drawState == DrawState::DrawingSquare)) {
 			delete startPoint;
 			startPoint = nullptr;
